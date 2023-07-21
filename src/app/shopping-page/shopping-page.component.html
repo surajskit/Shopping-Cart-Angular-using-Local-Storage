@@ -1,0 +1,76 @@
+<!-- Header logo section -->
+<div class="header_logo d-flex  justify-content-between bg-dark m-0">
+    <div class="d-flex gap-2 mt-3 ms-3 ">
+        <img src="../../assets/Images/Top_Logo_2.png" alt="Logo" width="25px" height="25px">
+        <p class="fw-bold text-white">Logoipsum</p>
+    </div>
+    <!-- Search bar option -->
+    <form class="d-flex m-2">
+        <div class="input-group">
+            <input class="form-control" type="search" id="search-input" name="search" [(ngModel)]="SearchText" placeholder="type to search">
+            <!-- [ngModelOptions]="{standalone: true}" -->
+            <button class="btn  bg-secondary" type="submit"  title="search" >
+                <i class="bi bi-search "></i>
+                <!-- how to use bootstrap icons in angular ?? = https://icons.getbootstrap.com/    -->
+            </button>
+        </div>
+    </form>
+</div>
+
+<!-- Go To Cart button  -->
+    <div class="d-flex justify-content-between">
+        <button class="btn btn-info py-1 px-1 my-2 mx-3" routerLink="/Home">Go back to Home Page</button>
+        <button type="submit" id="gotocart" class="btn bg-dark text-white mt-1 mb-3 me-5" routerLink="/Cart">
+            <i class="bi bi-cart3"></i> Go To Cart
+        </button>
+    </div>
+
+<!-- Shopping Cart options  -->
+<div class="cart d-flex mb-1 ms-4">
+    <!-- <div [ngStyle]="{color:'red'}">red</div> -->
+    <div id="container" class="d-flex flex-wrap shoppingCartMargin">
+        <div *ngFor="let product of productDetails | filter:SearchText; let i = index" >
+            <div class="cart1 border bg-white rounded mx-4"  >
+                <div class="image1">
+                    <img [src]="imageUrl[i]" alt="Image" class="cartImage">
+                </div>
+                <h3 class="fw-bold">{{product.name}}</h3>
+                <h3 class="text-danger">{{product.currency}} {{product.price}}</h3>
+                <ul>
+                    <li>for <span class="fw-bold">{{product.gender}}</span></li>
+                    <li>Availabe Quantity : <span class="fw-bold">{{product.quantity}}</span></li>
+                </ul>
+                
+                <button type="submit" class="btn bg-success fw-bold text-white" *ngIf="!isProductInCart(product)" (click)="togglePlusMinus($event, product, i)">ADD TO CART</button>
+                <div class="plusMinusBtn" [class.d-none]="!isProductInCart(product)">
+                  <button type="button" class="btn bg-danger btnColor text-white p-1"  (click)="minus($event, product, i)">-</button>
+                  <input type="number" title="number" class="numberValue" [value]="product.minQuantity" [disabled]="isDisabled">
+                  <button type="button" class="btn bg-success btnColor text-white p-1" (click)="plus(product, i)">+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- footer page section -->
+<footer class="d-flex justify-content-between">
+    <p> 2022 @ copyright</p>
+    <img src="../../assets/Images/Top_Logo_2.png" alt="logo" weight="20px" height="20px">
+    <div class="d-flex">
+        <p>privacy policy</p>
+        <p class="ms-3">terms & condition</p>
+    </div>
+</footer>
+
+
+
+<ng-template #availableQuantity let-modal class="bg-primary" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-body bg-primary">
+      <!-- Modal body content -->
+      <h5 class="modal-title" >Only {{availablequantity}} quantites are Availabe</h5>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="okBtn btn btn-primary" (click)="modal.close()">OK</button>
+    </div>
+</ng-template>
+

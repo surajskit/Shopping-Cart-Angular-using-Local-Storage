@@ -1,0 +1,64 @@
+<!-- Logo design for Header -->
+<div class="header_logo  d-flex text-align-center justify-content-between">
+    <div class="d-flex gap-1">
+      <img src="../../assets/Images/Top_Logo_2.png" alt="Logo" width="25px" height="25px">
+      <p class="fw-bold">Logoipsum</p>
+    </div>
+    <button type="submit" class="btn btn-dark py-0 px-1" id="admin" routerLink="/AddProduct">Add Product</button>
+</div>
+
+<!-- Product table -->
+<div class="table-data-admin">  
+    <table id="formData" class=" table table-bordered bg-white align-items-center ">
+        <thead class="align-items-center">
+            <tr class="table-info align-items-center">
+                <th >S.no.</th>
+                <th >Name</th>
+                <th >Price</th>
+                <th >Color</th>
+                <th >Gender</th>
+                <th >Currency</th>
+                <th >Quantity</th>
+                <th >Image</th>
+                <th >Action</th>
+            </tr>
+        </thead>
+        <!-- Product table rows will be added dynamically using JavaScript -->
+        <tbody>
+        <tr *ngFor="let product of productDetails; let i = index">
+            <td>{{i+1}}</td>
+            <!-- <td>{{product.id}}</td> -->
+            <td> {{product.name}}</td>
+            <td> {{product.price}}</td>
+            <td> {{product.color}}</td>
+            <td> {{product.gender}}</td>
+            <td> {{product.currency}}</td>
+            <td> {{product.quantity}}</td>
+            <td > <img [src]="imageUrl[i]" alt="Image" style="height: 100px; width: 100px;"></td>
+            <td class="d-flex py-4"> 
+
+                <div class="m-2 " (click)="edit(product,i)"><img class="cursor" src="../../assets/Images/Group 1507.png" alt="Edit"></div>
+                <div class="m-2 " (click)="deleteRow(i)"><img class="cursor" src="../../assets/Images/Delete.png" alt="Delete"></div> 
+
+                <!-- <button class="m-2" (click)="edit(product,i)"><img src="../../assets/Images/Group 1507.png" alt="Edit"></button> -->
+                <!-- <button class="m-2" (click)="deleteRow(i)"><img src="../../assets/Images/Delete.png" alt="Delete"></button>  -->
+              
+            </td>
+        </tr>
+    </tbody>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+<!-- footer page section -->
+<footer class="d-flex justify-content-between">
+    <p> 2022 @ copyright</p>
+    <img src="../../assets/Images/Top_Logo_2.png" alt="logo" weight="20px" height="20px">
+    <div class="d-flex">
+        <p>privacy policy</p>
+        <p class="ms-3">terms & condition</p>
+    </div>
+</footer>
+
+

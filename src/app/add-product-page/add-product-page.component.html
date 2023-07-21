@@ -1,0 +1,120 @@
+<!-- Logo design for Header -->
+<div class="header_logo  text-align-center justify-content-between">
+  <div class="d-flex gap-1">
+    <img src="../../assets/Images/Top_Logo_2.png" alt="Logo" width="25px" height="25px">
+    <p class="fw-bold">Logoipsum</p>
+  </div>
+  <div class="d-flex justify-content-between">
+    <button class="btn btn-info py-2 px-1" routerLink="/Home">Go back to Home Page</button>
+    <button type="submit" class="btn btn-dark py-2 px-1" routerLink="/ProductDetails">Go To Product Listing
+      Page</button>
+  </div>
+</div>
+
+<!-- Sign in as page section -->
+<div class="admin-panel d-flex justify-content-between">
+  <div>
+    <h2 class="mb-4">Add Product</h2>
+
+    <!-- Form layout to Add Product -->
+    <form #addProductForm="ngForm" (ngSubmit)="productDetails(addProductForm)" id="adminForm" >
+      <div class="row">
+        <div class="col-6  ">
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" title="text" class="form-control  mx-0 mt-0" name="name" minlength="2" maxlength="50" [(ngModel)]="defaultname" required>
+            <div *ngIf="(addProductForm.controls['name']?.dirty || addProductForm.controls['name']?.touched || addProductForm.submitted) && addProductForm.controls['name'].errors" class="text-danger fs-6">
+              <div *ngIf="addProductForm.controls['name'].errors['required']">Name is required.</div>
+              <div *ngIf="addProductForm.controls['name'].errors['minlength']">Name should be at least 2 characters long.</div>
+              <div *ngIf="addProductForm.controls['name'].errors['maxlength']">Name cannot exceed 50 characters.</div>
+            </div>
+           
+          </div>
+          <div class="mb-3">
+            <label for="price" class="form-label " > Price</label>
+            <input type="number" title="number" class="form-control  mx-0 mt-0"  name="price" [(ngModel)]="defaultprice" required>
+            <div *ngIf="(addProductForm.controls['price']?.dirty || addProductForm.controls['price']?.touched || addProductForm.submitted) && addProductForm.controls['price'].errors" class="text-danger fs-6">
+              <div *ngIf="addProductForm.controls['price'].errors['required']">Price is required.</div>
+            </div>
+
+          </div>
+          <div class="mb-3">
+            <label for="quantity" class="form-label " >Quantity</label>
+            <input type="number" title="number" class="form-control  mx-0 mt-0"  name="quantity"  [(ngModel)]="defaultquantity" required>
+            <div *ngIf="(addProductForm.controls['quantity']?.dirty || addProductForm.controls['quantity']?.touched || addProductForm.submitted) && addProductForm.controls['quantity'].errors" class="text-danger fs-6">
+              <div *ngIf="addProductForm.controls['quantity'].errors['required']">Quantity is required.</div>
+            </div>
+            
+          </div>
+        </div>
+
+        <div class="col-6">
+          <div class="mb-3">
+            <label for="gender" class="form-label " >Gender</label>
+            <select class="form-select" id="gender" name="gender" [(ngModel)]="defaultgender" required>
+              <option value="">Choose a gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="unisex">Unisex</option>
+            </select>
+            <div *ngIf="(addProductForm.controls['gender']?.dirty || addProductForm.controls['gender']?.touched || addProductForm.submitted) && addProductForm.controls['gender'].errors" class="text-danger fs-6">
+              <div *ngIf="addProductForm.controls['gender'].errors['required']">Gender is required.</div>
+            </div>
+
+          </div>
+          <div class="mb-3">
+            <label for="currency" class="form-label " >Currency</label>
+            <select class="form-select" id="currency" name="currency"  [(ngModel)]="defaultcurrency" required >
+              <option value="">Currency</option>
+              <option>&#x00024;</option>
+              <option>&#x20B9;</option>
+            </select>
+            <div *ngIf="(addProductForm.controls['currency']?.dirty || addProductForm.controls['currency']?.touched || addProductForm.submitted) && addProductForm.controls['currency'].errors" class="text-danger fs-6">
+              <div *ngIf="addProductForm.controls['currency'].errors['required']">Gender is required.</div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="color" class="form-label">Color</label>
+            <select class="form-select" id="color" name="color"  [(ngModel)]="defaultcolor" required>
+              <option value="">Choose a color</option>
+              <option value="red">Red</option>
+              <option value="blue">Blue</option>
+              <option value="green">Green</option>
+              <option value="yellow">yellow</option>
+            </select>
+            <div *ngIf="(addProductForm.controls['color']?.dirty || addProductForm.controls['color']?.touched || addProductForm.submitted) && addProductForm.controls['color'].errors" class="text-danger fs-6">
+              <div *ngIf="addProductForm.controls['color'].errors['required']">color is required.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-3 d-flex">
+        <div>
+          <label>Upload Image</label>
+          <input type="file" title="image" class="form-control ms-0 " id="forimage" accept="image/*" name="image"   [(ngModel)]="defaultimage" required  >
+          <div *ngIf="(addProductForm.controls['image']?.dirty || addProductForm.controls['image']?.touched || addProductForm.submitted) && addProductForm.controls['image'].errors" class="text-danger fs-6">
+            <div *ngIf="addProductForm.controls['image'].errors['required']">image is required.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-3 mt-1 ms-5 ">
+        <button type="reset" class="btn btn-secondary ms-2 px-5">Reset</button>
+        <button type="submit" class="btn btn-dark ms-5 px-5" #submitButton >Save</button>
+      </div>
+    </form>
+  </div>
+  <img src="../../assets/Images/mobile.png" alt="mobile" width="400px" height="435px"> <!--mobile image  -->
+</div>
+
+<!-- footer page section -->
+<footer class="d-flex justify-content-between">
+  <p> 2022 @ copyright</p>
+  <img src="../../assets/Images/Top_Logo_2.png" alt="logo" weight="20px" height="20px">
+  <div class="d-flex">
+    <p>privacy policy</p>
+    <p class="ms-3">terms & condition</p>
+  </div>
+</footer>

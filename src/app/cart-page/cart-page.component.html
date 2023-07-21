@@ -1,0 +1,93 @@
+<!-- Header logo section -->
+<div class="header_logo d-flex  justify-content-between bg-dark m-0">
+    <div class="d-flex gap-2 mt-3 ms-3 ">
+        <img src="../../assets/Images/Top_Logo_2.png" alt="Logo" width="25px" height="25px">
+        <p class="fw-bold text-white">Logoipsum</p>
+    </div>
+</div>
+
+<button class="btn btn-primary mx-5 mt-1" routerLink="/Shopping" >Add More Products</button>
+
+<div class="d-flex">
+    <div class="table-data ">
+        <table class="table table-bordered   " id="cartTable">
+            <thead class="align-items-center">
+                <tr class="table-secondary  ">
+                    <!-- <th>S.No</th> -->
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <!-- Product table rows will be added dynamically -->
+            <tbody >
+            <!-- class="text-center" -->
+            <tr *ngFor="let cart of cartItems; let i = index" >
+                <td > <i class="bi bi-x-circle cancel pe-3" (click)="cancel(cart,i)"></i>
+                <img [src]="imageUrl[i]" alt="Image" style="height: 100px; width: 100px;" class="pe-2">{{cart.name}}</td>
+            
+                <td class="text-success py-5"> {{cart.currency}} {{cart.price}}</td>
+                <td> 
+                    <div class="d-flex plusMinus py-5" >
+                        <button type="button" (click)="minus($event, cart, i)" (click)="calculateTotalCost()">-</button> 
+                        <input  type="number" [disabled]="isDisabled" value="{{cart.minQuantity}}">
+                        <button type="button" (click)="plus(cart, i)"    (click)="calculateTotalCost()">+</button>
+                    </div>
+                </td>
+                <td class="py-5">
+                    <span *ngIf="cart.currency == '$'" class="text-success">&#x20B9; {{((cart.minQuantity * cart.price) * 82.00).toFixed(2)}}</span>
+                    <span *ngIf="cart.currency == '₹'" class="text-success">&#x20B9; {{(cart.minQuantity * cart.price).toFixed(2)}}</span>
+                </td>
+            </tr>
+            
+            </tbody>
+        </table>
+
+    </div>
+    <div class="  my-4 ">
+        <table class="ms-2 me-5  border table table-bordered " style="width: 50px;">
+            <thead class="align-items-center">
+                <tr class="table-secondary align-items-center " colspan="2">
+                    <th colspan="2" class="ps-5 ">Cart totals</th>
+                </tr>
+            </thead>
+        
+            <tr >
+                <td >Subtotal :</td>
+                <td class="text-success">{{totalCost.toFixed(2)}}</td>
+            </tr>
+            <tr >
+                <td >Total Cost :</td>
+                <td class="text-success">{{totalCost.toFixed(2)}}</td>
+            </tr>
+            <tr>
+                <th colspan="2">
+                    <button class="check-out-btn bg-primary text-white border border-primary  m-0" (click)="checkOut(cartItems)"> proceed to checkout</button>
+                </th>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+<ng-template #placedOrder let-modal class="bg-primary" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-body bg-primary">
+      <!-- Modal body content -->
+      <h5 class="modal-title"> Thank you for ordering!</h5>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="okBtn btn btn-primary" (click)="modal.close()" routerLink="/Shopping">OK</button>
+    </div>
+  </ng-template>
+
+
+  <ng-template #availableQuantity let-modal class="bg-primary" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-body bg-primary">
+      <!-- Modal body content -->
+      <h5 class="modal-title" >Only {{availablequantity}} quantites are Availabe</h5>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="okBtn btn btn-primary" (click)="modal.close()">OK</button>
+    </div>
+</ng-template>
